@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Movie</string>
+    <string name="sample_title">The Amazing Spiderman 2</string>
+    <string name="sample_category">Aksi, Petualanga, Ilmu</string>
+    <string name="sample_score">90%</string>
+    <string name="sample_lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur diam eget volutpat porta. Sed dictum id mi in facilisis. Suspendisse vehicula convallis efficitur. Nunc imperdiet velit ut est hendrerit, vel cursus libero pellentesque. Sed varius vel orci in finibus. Etiam eu enim justo. Duis tempor ipsum in sem aliquam, id vestibulum odio imperdiet. Curabitur condimentum sem lacus, nec mattis diam pharetra nec. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In ac erat at lorem mattis varius. Etiam eu risus metus.</string>
+    <string name="sample_release">27 Agustus 2020</string>
+    <string name="description">Deskripsi</string>
+    <string name="movie_title">Film</string>
+    <string name="tvShow_title">Acara TV</string>
+
+    <!-- Base URL Poster Movie & Tv Show -->
+    <string name="url_poster">https://image.tmdb.org/t/p/w500%s</string>
+    <string name="other">Lainnya</string>
+    <string name="language">Bahasa</string>
+    <string name="en">En</string>
+    <string name="popularity">Popular</string>
+    <string name="_198_239">198.239</string>
+
+    <string name="favorite_movie">Favorite Film</string>
+    <string name="favorite_tvShow">Favorite Acara</string>
+</resources>

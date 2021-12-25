@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="margin_32dp">32dp</dimen>
+    <dimen name="margin_8dp">8dp</dimen>
+
+    <dimen name="theme_corner_radius">5dp</dimen>
+    <dimen name="list_horizontal_margin">0dp</dimen>
+
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <!-- Text Size -->
+    <dimen name="text_size_tiny">6sp</dimen>
+    <dimen name="text_size_xtiny">8sp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_normal">13sp</dimen>
+    <dimen name="text_size_xnormal">16sp</dimen>
+    <dimen name="text_size_xxnormal">18sp</dimen>
+    <dimen name="text_size_header">20sp</dimen>
+    <dimen name="text_size_large">24sp</dimen>
+    <dimen name="text_size_xlarge">26sp</dimen>
+    <dimen name="text_size_xxlarge">28sp</dimen>
+    <dimen name="text_size_huge">30sp</dimen>
+    <dimen name="text_width_height">170dp</dimen>
+    <dimen name="text_size_height">30dp</dimen>
+
+    <!-- Margin & padding -->
+    <dimen name="margin_padding_tiny">4dp</dimen>
+    <dimen name="margin_padding_xtiny">6dp</dimen>
+    <dimen name="margin_padding_small">9dp</dimen>
+    <dimen name="margin_padding_xsmall">12dp</dimen>
+    <dimen name="margin_padding_normal">15dp</dimen>
+    <dimen name="margin_padding_xnormal">20dp</dimen>
+    <dimen name="margin_padding_xxnormal">25dp</dimen>
+    <dimen name="margin_padding_large">30dp</dimen>
+    <dimen name="margin_padding_xlarge">40dp</dimen>
+    <dimen name="margin_padding_xxlarge">50dp</dimen>
+    <dimen name="margin_large">70dp</dimen>
+    <dimen name="spacing">9dp</dimen>
+    <dimen name="dividerHeight">8dp</dimen>
+    <dimen name="icon_width_height">30dp</dimen>
+</resources>
