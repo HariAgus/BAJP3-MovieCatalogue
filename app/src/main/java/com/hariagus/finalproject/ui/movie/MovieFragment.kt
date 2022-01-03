@@ -7,22 +7,21 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.paging.PagedList
 import com.hariagus.finalproject.data.source.local.entity.MovieEntity
 import com.hariagus.finalproject.databinding.FragmentMovieBinding
 import com.hariagus.finalproject.utils.SortUtils
-import com.hariagus.finalproject.viewmodel.ViewModelFactory
 import com.hariagus.finalproject.vo.Resource
 import com.hariagus.finalproject.vo.Status
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MovieFragment : Fragment() {
 
     private var _fragmentMoviesBinding: FragmentMovieBinding? = null
     private val binding get() = _fragmentMoviesBinding
 
-    private lateinit var viewModel: MovieViewModel
     private lateinit var moviesAdapter: MovieAdapter
+    private val viewModel: MovieViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,8 +36,6 @@ class MovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val factory = ViewModelFactory.getInstance(requireActivity())
-        viewModel = ViewModelProvider(this, factory)[MovieViewModel::class.java]
         moviesAdapter = MovieAdapter()
         setList(SortUtils.NEWEST)
 
@@ -55,7 +52,7 @@ class MovieFragment : Fragment() {
     }
 
     private fun setList(sort: String) {
-        viewModel.getMovies(sort).observe(this, moviesObserver)
+        viewModel.getMovies(sort).observe(requireActivity(), moviesObserver)
     }
 
     private val moviesObserver = Observer<Resource<PagedList<MovieEntity>>> { movies ->

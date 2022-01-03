@@ -6,14 +6,7 @@ import com.hariagus.finalproject.data.source.local.entity.MovieEntity
 import com.hariagus.finalproject.data.source.local.room.MovieDao
 import com.hariagus.finalproject.utils.SortUtils
 
-class LocalDataSource private constructor(private val mMovieDao: MovieDao) {
-
-    companion object {
-        private var INSTANCE: LocalDataSource? = null
-
-        fun getInstance(movieDao: MovieDao): LocalDataSource =
-            INSTANCE ?: LocalDataSource(movieDao)
-    }
+class LocalDataSource(private val mMovieDao: MovieDao) {
 
     fun getAllMovies(sort: String): DataSource.Factory<Int, MovieEntity> {
         val query = SortUtils.getSortedQueryMovies(sort)

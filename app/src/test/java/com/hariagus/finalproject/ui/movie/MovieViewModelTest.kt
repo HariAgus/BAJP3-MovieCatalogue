@@ -9,7 +9,8 @@ import com.hariagus.finalproject.data.source.local.entity.MovieEntity
 import com.hariagus.finalproject.utils.SortUtils
 import com.hariagus.finalproject.vo.Resource
 import com.nhaarman.mockitokotlin2.verify
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

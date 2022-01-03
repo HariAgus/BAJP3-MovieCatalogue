@@ -49,13 +49,13 @@ abstract class NetworkBoundResource<ResultType, RequestType>(private val mExecut
             result.removeSource(dbSource)
             when (response.status) {
                 StatusResponse.SUCCESS -> mExecutors.diskIO().execute {
-                        saveCallResult(response.body)
-                        mExecutors.mainThread().execute {
-                            result.addSource(loadFromDB()) { newData ->
-                                result.value = Resource.success(newData)
-                            }
+                    saveCallResult(response.body)
+                    mExecutors.mainThread().execute {
+                        result.addSource(loadFromDB()) { newData ->
+                            result.value = Resource.success(newData)
                         }
                     }
+                }
                 StatusResponse.EMPTY -> mExecutors.mainThread().execute {
                     result.addSource(loadFromDB()) { newData ->
                         result.value = Resource.success(newData)

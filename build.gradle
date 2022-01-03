@@ -30,6 +30,7 @@ ext {
     archLifecycleVersion = '2.2.0'
     roomVersion = '2.2.3'
     roomRuntimeVersion = '2.2.5'
+    coin = '2.2.2'
 }
 
 allprojects {

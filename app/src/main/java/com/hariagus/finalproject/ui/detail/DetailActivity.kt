@@ -6,26 +6,20 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.hariagus.finalproject.R
 import com.hariagus.finalproject.data.source.local.entity.MovieEntity
 import com.hariagus.finalproject.databinding.ActivityDetailBinding
-import com.hariagus.finalproject.viewmodel.ViewModelFactory
 import com.hariagus.finalproject.vo.Resource
 import com.hariagus.finalproject.vo.Status
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class DetailActivity : AppCompatActivity() {
 
-    companion object {
-        const val EXTRA_TYPE = "type"
-        const val ID_DATA = "id_data"
-    }
-
     private lateinit var binding: ActivityDetailBinding
-    private lateinit var viewModel: DetailViewModel
+    private val viewModel: DetailViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,9 +29,6 @@ class DetailActivity : AppCompatActivity() {
         val type = intent.getIntExtra(EXTRA_TYPE, -1)
         val typeEnum: TypeDetail = TypeDetail.values()[type]
         val id = intent.getIntExtra(ID_DATA, -1)
-
-        val factory = ViewModelFactory.getInstance(this)
-        viewModel = ViewModelProvider(this, factory)[DetailViewModel::class.java]
 
         binding.svLoadingDetail.visibility = View.VISIBLE
         binding.nestedScroll.visibility = View.GONE
@@ -140,6 +131,11 @@ class DetailActivity : AppCompatActivity() {
                 }
                 .into(posterBg)
         }
+    }
+
+    companion object {
+        const val EXTRA_TYPE = "type"
+        const val ID_DATA = "id_data"
     }
 
 }

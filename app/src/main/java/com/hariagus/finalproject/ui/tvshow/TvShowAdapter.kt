@@ -17,7 +17,8 @@ import com.hariagus.finalproject.ui.detail.DetailActivity.Companion.ID_DATA
 import com.hariagus.finalproject.ui.detail.TypeDetail
 
 
-class TvShowAdapter : PagedListAdapter<MovieEntity, TvShowAdapter.TvShowViewHolder>(DIFF_CALLBACK) {
+class
+TvShowAdapter : PagedListAdapter<MovieEntity, TvShowAdapter.TvShowViewHolder>(DIFF_CALLBACK) {
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<MovieEntity>() {

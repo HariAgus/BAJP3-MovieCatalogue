@@ -14,7 +14,8 @@ import com.hariagus.finalproject.databinding.ItemListBinding
 import com.hariagus.finalproject.ui.detail.DetailActivity
 import com.hariagus.finalproject.ui.detail.TypeDetail
 
-class FavoriteTvShowAdapter : PagedListAdapter<MovieEntity, FavoriteTvShowAdapter.ViewHolder>(DIFF_CALLBACK) {
+class
+FavoriteTvShowAdapter : PagedListAdapter<MovieEntity, FavoriteTvShowAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<MovieEntity>() {

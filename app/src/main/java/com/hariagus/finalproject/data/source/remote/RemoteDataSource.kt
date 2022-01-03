@@ -1,6 +1,5 @@
 package com.hariagus.finalproject.data.source.remote
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hariagus.finalproject.data.source.remote.response.MovieItem
@@ -15,18 +14,6 @@ import retrofit2.Response
 
 class RemoteDataSource {
 
-    companion object {
-        private val TAG: String = RemoteDataSource::class.java.simpleName
-
-        @Volatile
-        private var instance: RemoteDataSource? = null
-
-        fun getInstance(): RemoteDataSource =
-            instance ?: synchronized(this) {
-                instance ?: RemoteDataSource()
-            }
-    }
-
     fun getMovies(): LiveData<ApiResponse<List<MovieItem>>> {
         EspressoIdlingResource.increment()
         val resultMovie = MutableLiveData<ApiResponse<List<MovieItem>>>()
@@ -40,7 +27,6 @@ class RemoteDataSource {
             }
 
             override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
-                Log.e(TAG, "onFailure: ${t.message.toString()}")
                 EspressoIdlingResource.decrement()
             }
         })
@@ -63,11 +49,10 @@ class RemoteDataSource {
             }
 
             override fun onFailure(call: Call<TvShowResponse>, t: Throwable) {
-                Log.e(TAG, "onFailure: ${t.message.toString()}", )
                 EspressoIdlingResource.decrement()
             }
         })
-        return  resultTvShow
+        return resultTvShow
     }
 
 }

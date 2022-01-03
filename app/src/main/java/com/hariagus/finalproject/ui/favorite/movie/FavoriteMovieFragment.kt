@@ -5,17 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.paging.PagedList
-import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.hariagus.finalproject.R
-import com.hariagus.finalproject.data.source.local.entity.MovieEntity
 import com.hariagus.finalproject.databinding.FragmentFavoriteMovieBinding
 import com.hariagus.finalproject.ui.favorite.FavoriteViewModel
-import com.hariagus.finalproject.viewmodel.ViewModelFactory
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoriteMovieFragment : Fragment() {
 
@@ -23,7 +19,7 @@ class FavoriteMovieFragment : Fragment() {
     private val binding get() = _fragmentFavoriteMovieBinding
 
     private lateinit var favoriteAdapter: FavoriteMovieAdapter
-    private lateinit var viewModel: FavoriteViewModel
+    private val viewModel: FavoriteViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,12 +35,10 @@ class FavoriteMovieFragment : Fragment() {
 
         itemTouchHelper.attachToRecyclerView(binding?.rvMovieFavorite)
 
-        val factory = ViewModelFactory.getInstance(requireActivity())
-        viewModel = ViewModelProvider(this, factory)[FavoriteViewModel::class.java]
         favoriteAdapter = FavoriteMovieAdapter()
 
         binding?.progressSpinKitList?.visibility = View.VISIBLE
-        viewModel.getFavoriteMovies().observe(this, { movies ->
+        viewModel.getFavoriteMovies().observe(requireActivity(), { movies ->
             binding?.progressSpinKitList?.visibility = View.GONE
             favoriteAdapter.submitList(movies)
         })
@@ -60,7 +54,9 @@ class FavoriteMovieFragment : Fragment() {
             recyclerView: RecyclerView,
             viewHolder: RecyclerView.ViewHolder
         ): Int {
-            return makeMovementFlags(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT)
+            return makeMovementFlags(
+                0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+            )
         }
 
         override fun onMove(
@@ -76,7 +72,8 @@ class FavoriteMovieFragment : Fragment() {
                 val swipedPosition = viewHolder.adapterPosition
                 val movieEntity = favoriteAdapter.getSwipedData(swipedPosition)
                 movieEntity?.let { viewModel.setFavoriteDataMovie(it) }
-                val snackBar = Snackbar.make(view as View, R.string.undo_delete, Snackbar.LENGTH_LONG)
+                val snackBar =
+                    Snackbar.make(view as View, R.string.undo_delete, Snackbar.LENGTH_LONG)
                 snackBar.setAction("OK") { _ ->
                     movieEntity?.let { viewModel.setFavoriteDataMovie(it) }
                 }
@@ -89,4 +86,5 @@ class FavoriteMovieFragment : Fragment() {
         super.onDestroy()
         _fragmentFavoriteMovieBinding = null
     }
+
 }

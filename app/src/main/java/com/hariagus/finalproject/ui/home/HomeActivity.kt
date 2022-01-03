@@ -27,5 +27,6 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this, FavoriteActivity::class.java)
             startActivity(intent)
         }
+
     }
 }
