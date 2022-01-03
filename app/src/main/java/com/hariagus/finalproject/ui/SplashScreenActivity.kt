@@ -1,12 +1,12 @@
 package com.hariagus.finalproject.ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import com.hariagus.finalproject.R
 import com.hariagus.finalproject.ui.home.HomeActivity
-import com.hariagus.finalproject.utils.Const.Companion.DELAY_MOVE
+import com.hariagus.finalproject.utils.Const.DELAY_MOVIE
+import com.hariagus.finalproject.utils.startActivity
 
 class SplashScreenActivity : AppCompatActivity() {
 
@@ -15,8 +15,9 @@ class SplashScreenActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash_screen)
 
         Handler(mainLooper).postDelayed({
-            startActivity(Intent(this, HomeActivity::class.java))
+            startActivity<HomeActivity>()
             finish()
-        }, DELAY_MOVE)
+        }, DELAY_MOVIE)
+
     }
 }

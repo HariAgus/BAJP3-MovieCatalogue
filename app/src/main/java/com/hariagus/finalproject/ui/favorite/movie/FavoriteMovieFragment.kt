@@ -11,12 +11,14 @@ import com.google.android.material.snackbar.Snackbar
 import com.hariagus.finalproject.R
 import com.hariagus.finalproject.databinding.FragmentFavoriteMovieBinding
 import com.hariagus.finalproject.ui.favorite.FavoriteViewModel
+import com.hariagus.finalproject.utils.gone
+import com.hariagus.finalproject.utils.visible
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoriteMovieFragment : Fragment() {
 
     private var _fragmentFavoriteMovieBinding: FragmentFavoriteMovieBinding? = null
-    private val binding get() = _fragmentFavoriteMovieBinding
+    private val binding get() = _fragmentFavoriteMovieBinding!!
 
     private lateinit var favoriteAdapter: FavoriteMovieAdapter
     private val viewModel: FavoriteViewModel by viewModel()
@@ -24,28 +26,28 @@ class FavoriteMovieFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _fragmentFavoriteMovieBinding =
             FragmentFavoriteMovieBinding.inflate(layoutInflater, container, false)
-        return binding?.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        itemTouchHelper.attachToRecyclerView(binding?.rvMovieFavorite)
+        itemTouchHelper.attachToRecyclerView(binding.rvMovieFavorite)
 
         favoriteAdapter = FavoriteMovieAdapter()
 
-        binding?.progressSpinKitList?.visibility = View.VISIBLE
+        binding.progressSpinKitList.visible()
         viewModel.getFavoriteMovies().observe(requireActivity(), { movies ->
-            binding?.progressSpinKitList?.visibility = View.GONE
+            binding.progressSpinKitList.gone()
             favoriteAdapter.submitList(movies)
         })
 
-        with(binding?.rvMovieFavorite) {
-            this?.setHasFixedSize(true)
-            this?.adapter = favoriteAdapter
+        with(binding.rvMovieFavorite) {
+            this.setHasFixedSize(true)
+            this.adapter = favoriteAdapter
         }
     }
 
@@ -71,11 +73,15 @@ class FavoriteMovieFragment : Fragment() {
             if (view != null) {
                 val swipedPosition = viewHolder.adapterPosition
                 val movieEntity = favoriteAdapter.getSwipedData(swipedPosition)
-                movieEntity?.let { viewModel.setFavoriteDataMovie(it) }
+                movieEntity?.let {
+                    viewModel.setFavoriteDataMovie(it)
+                }
                 val snackBar =
                     Snackbar.make(view as View, R.string.undo_delete, Snackbar.LENGTH_LONG)
                 snackBar.setAction("OK") { _ ->
-                    movieEntity?.let { viewModel.setFavoriteDataMovie(it) }
+                    movieEntity?.let {
+                        viewModel.setFavoriteDataMovie(it)
+                    }
                 }
                 snackBar.show()
             }

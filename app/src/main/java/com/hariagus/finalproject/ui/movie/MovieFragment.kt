@@ -1,16 +1,20 @@
 package com.hariagus.finalproject.ui.movie
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.paging.PagedList
+import com.hariagus.finalproject.R
 import com.hariagus.finalproject.data.source.local.entity.MovieEntity
 import com.hariagus.finalproject.databinding.FragmentMovieBinding
 import com.hariagus.finalproject.utils.SortUtils
+import com.hariagus.finalproject.utils.gone
+import com.hariagus.finalproject.utils.toast
+import com.hariagus.finalproject.utils.visible
 import com.hariagus.finalproject.vo.Resource
 import com.hariagus.finalproject.vo.Status
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -18,7 +22,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MovieFragment : Fragment() {
 
     private var _fragmentMoviesBinding: FragmentMovieBinding? = null
-    private val binding get() = _fragmentMoviesBinding
+    private val binding get() = _fragmentMoviesBinding!!
 
     private lateinit var moviesAdapter: MovieAdapter
     private val viewModel: MovieViewModel by viewModel()
@@ -26,11 +30,11 @@ class MovieFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _fragmentMoviesBinding = FragmentMovieBinding.inflate(
             layoutInflater, container, false
         )
-        return binding?.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,34 +43,39 @@ class MovieFragment : Fragment() {
         moviesAdapter = MovieAdapter()
         setList(SortUtils.NEWEST)
 
-        binding?.progressSpinKitList?.visibility = View.VISIBLE
+        binding.progressSpinKitList.visible()
 
-        with(binding?.rvMovie) {
-            this?.setHasFixedSize(true)
-            this?.adapter = moviesAdapter
+        with(binding.rvMovie) {
+            setHasFixedSize(true)
+            adapter = moviesAdapter
         }
 
-        binding?.fabNewest?.setOnClickListener { setList(SortUtils.NEWEST) }
-        binding?.fabOldest?.setOnClickListener { setList(SortUtils.OLDEST) }
-        binding?.fabPopularity?.setOnClickListener { setList(SortUtils.POPULARITY) }
+        binding.apply {
+            fabNewest.setOnClickListener { setList(SortUtils.NEWEST) }
+            fabOldest.setOnClickListener { setList(SortUtils.OLDEST) }
+            fabPopularity.setOnClickListener { setList(SortUtils.POPULARITY) }
+        }
     }
 
     private fun setList(sort: String) {
         viewModel.getMovies(sort).observe(requireActivity(), moviesObserver)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private val moviesObserver = Observer<Resource<PagedList<MovieEntity>>> { movies ->
         if (movies != null) {
             when (movies.status) {
-                Status.LOADING -> binding?.progressSpinKitList?.visibility = View.VISIBLE
+                Status.LOADING -> binding.progressSpinKitList.visible()
                 Status.SUCCESS -> {
-                    binding?.progressSpinKitList?.visibility = View.GONE
-                    moviesAdapter.submitList(movies.data)
-                    moviesAdapter.notifyDataSetChanged()
+                    binding.progressSpinKitList.gone()
+                    moviesAdapter.apply {
+                        submitList(movies.data)
+                        notifyDataSetChanged()
+                    }
                 }
                 Status.ERROR -> {
-                    binding?.progressSpinKitList?.visibility = View.GONE
-                    Toast.makeText(context, "There is an Error", Toast.LENGTH_SHORT).show()
+                    binding.progressSpinKitList.gone()
+                    context?.toast(getString(R.string.message_error))
                 }
             }
         }

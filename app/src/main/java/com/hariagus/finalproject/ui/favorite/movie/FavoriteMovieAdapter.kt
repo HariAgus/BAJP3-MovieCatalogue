@@ -1,20 +1,20 @@
 package com.hariagus.finalproject.ui.favorite.movie
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.hariagus.finalproject.R
 import com.hariagus.finalproject.data.source.local.entity.MovieEntity
 import com.hariagus.finalproject.databinding.ItemListBinding
 import com.hariagus.finalproject.ui.detail.DetailActivity
 import com.hariagus.finalproject.ui.detail.TypeDetail
+import com.hariagus.finalproject.utils.loadImage
+import com.hariagus.finalproject.utils.startActivity
 
-class FavoriteMovieAdapter : PagedListAdapter<MovieEntity, FavoriteMovieAdapter.ViewHolder>(DIFF_CALLBACK) {
+class FavoriteMovieAdapter :
+    PagedListAdapter<MovieEntity, FavoriteMovieAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<MovieEntity>() {
@@ -28,7 +28,10 @@ class FavoriteMovieAdapter : PagedListAdapter<MovieEntity, FavoriteMovieAdapter.
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteMovieAdapter.ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): FavoriteMovieAdapter.ViewHolder {
         val itemListBinding = ItemListBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
@@ -46,27 +49,25 @@ class FavoriteMovieAdapter : PagedListAdapter<MovieEntity, FavoriteMovieAdapter.
 
     inner class ViewHolder(private val binding: ItemListBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
         fun bind(movie: MovieEntity) {
             with(binding) {
                 tvTitle.text = movie.title
                 tvScore.text = movie.voteAverage.toString()
-                Glide.with(itemView.context)
-                    .load(itemView.context.getString(R.string.url_poster, movie.posterPath))
-                    .apply {
-                        RequestOptions()
-                            .placeholder(R.drawable.loading_animation)
-                            .error(R.drawable.loading_animation)
-                    }
-                    .into(roundedPoster)
+                itemView.context.loadImage(
+                    itemView.context.getString(R.string.url_poster, movie.posterPath),
+                    roundedPoster
+                )
             }
 
             itemView.setOnClickListener {
-                val intent = Intent(itemView.context, DetailActivity::class.java).apply {
-                    putExtra(DetailActivity.EXTRA_TYPE, TypeDetail.MOVIE.ordinal)
-                    putExtra(DetailActivity.ID_DATA, movie.id)
-                }
-                itemView.context.startActivity(intent)
+                itemView.context.startActivity<DetailActivity>(
+                    DetailActivity.EXTRA_TYPE to TypeDetail.MOVIE.ordinal,
+                    DetailActivity.ID_DATA to movie.id
+                )
+
             }
         }
+
     }
 }

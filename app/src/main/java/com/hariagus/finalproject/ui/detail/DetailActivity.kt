@@ -2,15 +2,15 @@ package com.hariagus.finalproject.ui.detail
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.hariagus.finalproject.R
 import com.hariagus.finalproject.data.source.local.entity.MovieEntity
 import com.hariagus.finalproject.databinding.ActivityDetailBinding
+import com.hariagus.finalproject.utils.gone
+import com.hariagus.finalproject.utils.loadImage
+import com.hariagus.finalproject.utils.toast
+import com.hariagus.finalproject.utils.visible
 import com.hariagus.finalproject.vo.Resource
 import com.hariagus.finalproject.vo.Status
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -30,8 +30,10 @@ class DetailActivity : AppCompatActivity() {
         val typeEnum: TypeDetail = TypeDetail.values()[type]
         val id = intent.getIntExtra(ID_DATA, -1)
 
-        binding.svLoadingDetail.visibility = View.VISIBLE
-        binding.nestedScroll.visibility = View.GONE
+        binding.apply {
+            svLoadingDetail.visible()
+            nestedScroll.gone()
+        }
         when (typeEnum) {
             TypeDetail.MOVIE -> {
                 viewModel.setSelectedMovie(id)
@@ -65,18 +67,18 @@ class DetailActivity : AppCompatActivity() {
 
     private fun showDetailData(movie: Resource<MovieEntity>) {
         when (movie.status) {
-            Status.LOADING -> binding.svLoadingDetail.visibility = View.VISIBLE
+            Status.LOADING -> binding.svLoadingDetail.visible()
             Status.SUCCESS -> if (movie.data != null) {
-                binding.svLoadingDetail.visibility = View.GONE
-                binding.nestedScroll.visibility = View.VISIBLE
+                binding.svLoadingDetail.gone()
+                binding.nestedScroll.visible()
 
                 val state = movie.data.isFavorite
                 setFavorite(state)
                 loadDetailData(movie.data)
             }
             Status.ERROR -> {
-                binding.svLoadingDetail.visibility = View.GONE
-                Toast.makeText(this, "There is an Error", Toast.LENGTH_SHORT).show()
+                binding.svLoadingDetail.gone()
+                toast(getString(R.string.message_error))
             }
         }
     }
@@ -107,29 +109,20 @@ class DetailActivity : AppCompatActivity() {
             tvReleaseDate.text = movieEntity.releaseDate
             tvScoreDetail.text = movieEntity.voteAverage.toString()
 
-            /**
-             * Poster Detail
-             */
-            Glide.with(this@DetailActivity)
-                .load(this@DetailActivity.getString(R.string.url_poster, movieEntity.posterPath))
-                .apply {
-                    RequestOptions()
-                        .placeholder(R.drawable.loading_animation)
-                        .error(R.drawable.loading_animation)
-                }
-                .into(roundedPosterDetail)
-
-            /**
-             * Background Detail
-             */
-            Glide.with(this@DetailActivity)
-                .load(this@DetailActivity.getString(R.string.url_poster, movieEntity.backdropPath))
-                .apply {
-                    RequestOptions()
-                        .placeholder(R.drawable.loading_animation)
-                        .error(R.drawable.loading_animation)
-                }
-                .into(posterBg)
+            // Poster Detail
+            loadImage(
+                this@DetailActivity.getString(
+                    R.string.url_poster, movieEntity.posterPath
+                ),
+                roundedPosterDetail
+            )
+            // Background Detail
+            loadImage(
+                this@DetailActivity.getString(
+                    R.string.url_poster, movieEntity.backdropPath
+                ),
+                posterBg
+            )
         }
     }
 

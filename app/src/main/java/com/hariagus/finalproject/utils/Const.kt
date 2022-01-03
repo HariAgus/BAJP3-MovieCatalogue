@@ -1,8 +1,7 @@
 package com.hariagus.finalproject.utils
 
-class Const {
+object Const {
 
-    companion object {
-        const val DELAY_MOVE = 2000L
-    }
+    const val DELAY_MOVIE = 2000L
+
 }

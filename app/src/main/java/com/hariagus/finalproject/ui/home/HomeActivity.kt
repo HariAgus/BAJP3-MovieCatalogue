@@ -4,28 +4,31 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
-import com.hariagus.finalproject.R
+import com.hariagus.finalproject.databinding.ActivityHomeBinding
 import com.hariagus.finalproject.ui.favorite.FavoriteActivity
+import com.hariagus.finalproject.utils.startActivity
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityHomeBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val viewPagerAdapter = HomeViewPagerAdapter(this, supportFragmentManager)
-        homeViewPager.adapter = viewPagerAdapter
-        tabLayoutHome.setupWithViewPager(homeViewPager)
+        binding.homeViewPager.adapter = viewPagerAdapter
+        tabLayoutHome.setupWithViewPager(binding.homeViewPager)
 
-        ivChangeLanguage.setOnClickListener {
+        binding.ivChangeLanguage.setOnClickListener {
             val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
             startActivity(intent)
         }
 
-        ivFavoriteActivity.setOnClickListener {
-            val intent = Intent(this, FavoriteActivity::class.java)
-            startActivity(intent)
+        binding.ivFavoriteActivity.setOnClickListener {
+            startActivity<FavoriteActivity>()
         }
 
     }
