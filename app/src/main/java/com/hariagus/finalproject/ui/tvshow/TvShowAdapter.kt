@@ -16,8 +16,7 @@ import com.hariagus.finalproject.utils.loadImage
 import com.hariagus.finalproject.utils.startActivity
 
 
-class
-TvShowAdapter : PagedListAdapter<MovieEntity, TvShowAdapter.TvShowViewHolder>(DIFF_CALLBACK) {
+class TvShowAdapter : PagedListAdapter<MovieEntity, TvShowAdapter.TvShowViewHolder>(DIFF_CALLBACK) {
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<MovieEntity>() {
