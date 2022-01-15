@@ -200,7 +200,7 @@
                         android:layout_marginStart="4dp"
                         android:layout_marginEnd="4dp"
                         android:fontFamily="@font/quicksand_bold"
-                        android:text=":"
+                        android:text="@string/colon"
                         android:textColor="@color/textColorWhite"
                         android:textSize="@dimen/text_size_xnormal" />
 

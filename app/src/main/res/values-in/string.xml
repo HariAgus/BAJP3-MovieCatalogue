@@ -19,4 +19,9 @@
 
     <string name="favorite_movie">Favorite Film</string>
     <string name="favorite_tvShow">Favorite Acara</string>
+
+    <string name="undo_delete">Batal untuk hapus?</string>
+    <string name="message_error">Terjadi sebuah error</string>
+    <string name="message_add_favorite">Berhasil menambahkan ke Favorite</string>
+    <string name="message_remove_favorite">Berhasil menghapus dari Favorite</string>
 </resources>

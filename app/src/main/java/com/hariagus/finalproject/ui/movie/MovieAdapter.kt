@@ -8,13 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hariagus.finalproject.R
 import com.hariagus.finalproject.data.source.local.entity.MovieEntity
 import com.hariagus.finalproject.databinding.ItemListBinding
-import com.hariagus.finalproject.ui.detail.DetailActivity
-import com.hariagus.finalproject.ui.detail.DetailActivity.Companion.EXTRA_TYPE
-import com.hariagus.finalproject.ui.detail.DetailActivity.Companion.ID_DATA
-import com.hariagus.finalproject.ui.detail.TypeDetail
 import com.hariagus.finalproject.utils.loadImage
-import com.hariagus.finalproject.utils.startActivity
-
 
 class MovieAdapter : PagedListAdapter<MovieEntity, MovieAdapter.MovieViewHolder>(DIFF_CALLBACK) {
 
@@ -30,6 +24,8 @@ class MovieAdapter : PagedListAdapter<MovieEntity, MovieAdapter.MovieViewHolder>
         }
     }
 
+    private var listener: ((MovieEntity) -> Unit)? = null
+
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
     ): MovieViewHolder {
@@ -42,14 +38,14 @@ class MovieAdapter : PagedListAdapter<MovieEntity, MovieAdapter.MovieViewHolder>
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movie = getItem(position)
         if (movie != null) {
-            holder.bind(movie)
+            holder.bind(movie, listener)
         }
     }
 
-    class MovieViewHolder(private val binding: ItemListBinding) :
+    inner class MovieViewHolder(private val binding: ItemListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(movieEntity: MovieEntity) {
+        fun bind(movieEntity: MovieEntity, listener: ((MovieEntity) -> Unit)?) {
             with(binding) {
                 tvTitle.text = movieEntity.title
                 tvScore.text = movieEntity.voteAverage.toString()
@@ -60,12 +56,13 @@ class MovieAdapter : PagedListAdapter<MovieEntity, MovieAdapter.MovieViewHolder>
             }
 
             itemView.setOnClickListener {
-                itemView.context.startActivity<DetailActivity>(
-                    EXTRA_TYPE to TypeDetail.MOVIE.ordinal,
-                    ID_DATA to movieEntity.id
-                )
+                listener?.invoke(movieEntity)
             }
         }
-
     }
+
+    fun onClick(listener: ((MovieEntity) -> Unit)?) {
+        this.listener = listener
+    }
+
 }

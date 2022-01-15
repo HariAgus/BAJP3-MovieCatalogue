@@ -6,13 +6,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.hariagus.finalproject"
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
 
@@ -95,4 +95,8 @@ dependencies {
 
     //Pagination
     implementation 'androidx.paging:paging-runtime-ktx:2.1.2'
+
+    // Beauty Toast
+    implementation 'com.github.Spikeysanju:MotionToast:1.4'
+
 }

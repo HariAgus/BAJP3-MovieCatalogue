@@ -8,16 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hariagus.finalproject.R
 import com.hariagus.finalproject.data.source.local.entity.MovieEntity
 import com.hariagus.finalproject.databinding.ItemListBinding
-import com.hariagus.finalproject.ui.detail.DetailActivity
-import com.hariagus.finalproject.ui.detail.DetailActivity.Companion.EXTRA_TYPE
-import com.hariagus.finalproject.ui.detail.DetailActivity.Companion.ID_DATA
-import com.hariagus.finalproject.ui.detail.TypeDetail
 import com.hariagus.finalproject.utils.loadImage
-import com.hariagus.finalproject.utils.startActivity
 
 
-class
-TvShowAdapter : PagedListAdapter<MovieEntity, TvShowAdapter.TvShowViewHolder>(DIFF_CALLBACK) {
+class TvShowAdapter : PagedListAdapter<MovieEntity, TvShowAdapter.TvShowViewHolder>(DIFF_CALLBACK) {
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<MovieEntity>() {
@@ -30,6 +24,8 @@ TvShowAdapter : PagedListAdapter<MovieEntity, TvShowAdapter.TvShowViewHolder>(DI
             }
         }
     }
+
+    private var listener: ((MovieEntity) -> Unit)? = null
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -44,14 +40,14 @@ TvShowAdapter : PagedListAdapter<MovieEntity, TvShowAdapter.TvShowViewHolder>(DI
     override fun onBindViewHolder(holder: TvShowAdapter.TvShowViewHolder, position: Int) {
         val tvShow = getItem(position)
         if (tvShow != null) {
-            holder.bind(tvShow)
+            holder.bind(tvShow, listener)
         }
     }
 
     inner class TvShowViewHolder(private val binding: ItemListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(tvShow: MovieEntity) {
+        fun bind(tvShow: MovieEntity, listener: ((MovieEntity) -> Unit)?) {
             with(binding) {
                 tvTitle.text = tvShow.title
                 tvScore.text = tvShow.voteAverage.toString()
@@ -62,12 +58,14 @@ TvShowAdapter : PagedListAdapter<MovieEntity, TvShowAdapter.TvShowViewHolder>(DI
             }
 
             itemView.setOnClickListener {
-                itemView.context.startActivity<DetailActivity>(
-                    EXTRA_TYPE to TypeDetail.TV_SHOW.ordinal,
-                    ID_DATA to tvShow.id
-                )
+                listener?.invoke(tvShow)
             }
         }
 
     }
+
+    fun onClick(listener: ((MovieEntity) -> Unit)?) {
+        this.listener = listener
+    }
+
 }

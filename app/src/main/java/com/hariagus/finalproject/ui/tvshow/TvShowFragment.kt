@@ -11,10 +11,9 @@ import androidx.paging.PagedList
 import com.hariagus.finalproject.R
 import com.hariagus.finalproject.data.source.local.entity.MovieEntity
 import com.hariagus.finalproject.databinding.FragmentTvShowBinding
-import com.hariagus.finalproject.utils.SortUtils
-import com.hariagus.finalproject.utils.gone
-import com.hariagus.finalproject.utils.toast
-import com.hariagus.finalproject.utils.visible
+import com.hariagus.finalproject.ui.detail.DetailActivity
+import com.hariagus.finalproject.ui.detail.TypeDetail
+import com.hariagus.finalproject.utils.*
 import com.hariagus.finalproject.vo.Resource
 import com.hariagus.finalproject.vo.Status
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -54,6 +53,17 @@ class TvShowFragment : Fragment() {
             fabNewest.setOnClickListener { setList(SortUtils.NEWEST) }
             fabOldest.setOnClickListener { setList(SortUtils.OLDEST) }
             fabPopularity.setOnClickListener { setList(SortUtils.POPULARITY) }
+        }
+
+        onClick()
+    }
+
+    private fun onClick() {
+        tvShowAdapter.onClick { data ->
+            requireContext().startActivity<DetailActivity>(
+                DetailActivity.EXTRA_TYPE to TypeDetail.TV_SHOW.ordinal,
+                DetailActivity.ID_DATA to data.id
+            )
         }
     }
 
