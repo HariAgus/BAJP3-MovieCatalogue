@@ -20,6 +20,11 @@
     <string name="favorite_movie">Favorite Movie</string>
     <string name="favorite_tvShow">Favorite TV</string>
     <string name="undo_delete">Cancel to delete?</string>
-    <string name="ok">OK</string>
+    <string name="ok" translatable="false">OK</string>
     <string name="message_error">There is an Error</string>
+    <string name="colon" translatable="false">:</string>
+    <string name="success" translatable="false">Success</string>
+    <string name="message_add_favorite">You have successfully add favorite</string>
+    <string name="info" translatable="false">Info</string>
+    <string name="message_remove_favorite">You have successfully remove favorite</string>
 </resources>

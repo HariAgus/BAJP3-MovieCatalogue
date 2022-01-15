@@ -7,10 +7,7 @@ import androidx.core.content.ContextCompat
 import com.hariagus.finalproject.R
 import com.hariagus.finalproject.data.source.local.entity.MovieEntity
 import com.hariagus.finalproject.databinding.ActivityDetailBinding
-import com.hariagus.finalproject.utils.gone
-import com.hariagus.finalproject.utils.loadImage
-import com.hariagus.finalproject.utils.toast
-import com.hariagus.finalproject.utils.visible
+import com.hariagus.finalproject.utils.*
 import com.hariagus.finalproject.vo.Resource
 import com.hariagus.finalproject.vo.Status
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -20,6 +17,9 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
     private val viewModel: DetailViewModel by viewModel()
+
+    private var movie: Resource<MovieEntity>? = null
+    private var tvShow: Resource<MovieEntity>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,11 +34,13 @@ class DetailActivity : AppCompatActivity() {
             svLoadingDetail.visible()
             nestedScroll.gone()
         }
+
         when (typeEnum) {
             TypeDetail.MOVIE -> {
                 viewModel.setSelectedMovie(id)
                 viewModel.movieDetail.observe(this, { movie ->
                     if (movie != null) {
+                        this.movie = movie
                         showDetailData(movie)
                     }
                 })
@@ -47,6 +49,7 @@ class DetailActivity : AppCompatActivity() {
                 viewModel.setSelectedTvShow(id)
                 viewModel.tvShowDetail.observe(this, { tvShow ->
                     if (tvShow != null) {
+                        this.tvShow = tvShow
                         showDetailData(tvShow)
                     }
                 })
@@ -54,12 +57,40 @@ class DetailActivity : AppCompatActivity() {
         }
 
         binding.fabFavorite.setOnClickListener {
-            when (typeEnum) {
-                TypeDetail.MOVIE -> {
+            setDataToFavorite(typeEnum)
+        }
+    }
+
+    private fun setDataToFavorite(typeEnum: TypeDetail) {
+        when (typeEnum) {
+            TypeDetail.MOVIE -> {
+                if (movie?.data?.isFavorite != true) {
                     viewModel.setFavoriteMovie()
+                    successToast(
+                        getString(R.string.success),
+                        getString(R.string.message_add_favorite)
+                    )
+                } else {
+                    viewModel.setFavoriteMovie()
+                    infoToast(
+                        getString(R.string.info),
+                        getString(R.string.message_remove_favorite)
+                    )
                 }
-                TypeDetail.TV_SHOW -> {
+            }
+            TypeDetail.TV_SHOW -> {
+                if (tvShow?.data?.isFavorite != true) {
                     viewModel.setFavoriteTvShow()
+                    successToast(
+                        getString(R.string.success),
+                        getString(R.string.message_add_favorite)
+                    )
+                } else {
+                    viewModel.setFavoriteTvShow()
+                    infoToast(
+                        getString(R.string.info),
+                        getString(R.string.message_remove_favorite)
+                    )
                 }
             }
         }
