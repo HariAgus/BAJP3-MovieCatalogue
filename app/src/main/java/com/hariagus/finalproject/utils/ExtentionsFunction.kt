@@ -66,7 +66,7 @@ fun fillIntentArguments(intent: Intent, params: Array<out Pair<String, Any?>>) {
     }
 }
 
-fun Activity.successToast(title: String, message: String) {
+fun Activity.showSuccessToast(title: String, message: String) {
     MotionToast.createToast(
         this,
         title,
@@ -78,7 +78,7 @@ fun Activity.successToast(title: String, message: String) {
     )
 }
 
-fun Activity.infoToast(title: String, message: String) {
+fun Activity.showInfoToast(title: String, message: String) {
     MotionToast.createToast(
         this,
         title,

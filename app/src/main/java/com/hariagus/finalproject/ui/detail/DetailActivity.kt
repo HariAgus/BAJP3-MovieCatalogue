@@ -12,7 +12,6 @@ import com.hariagus.finalproject.vo.Resource
 import com.hariagus.finalproject.vo.Status
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
@@ -66,13 +65,13 @@ class DetailActivity : AppCompatActivity() {
             TypeDetail.MOVIE -> {
                 if (movie?.data?.isFavorite != true) {
                     viewModel.setFavoriteMovie()
-                    successToast(
+                    showSuccessToast(
                         getString(R.string.success),
                         getString(R.string.message_add_favorite)
                     )
                 } else {
                     viewModel.setFavoriteMovie()
-                    infoToast(
+                    showInfoToast(
                         getString(R.string.info),
                         getString(R.string.message_remove_favorite)
                     )
@@ -81,13 +80,13 @@ class DetailActivity : AppCompatActivity() {
             TypeDetail.TV_SHOW -> {
                 if (tvShow?.data?.isFavorite != true) {
                     viewModel.setFavoriteTvShow()
-                    successToast(
+                    showSuccessToast(
                         getString(R.string.success),
                         getString(R.string.message_add_favorite)
                     )
                 } else {
                     viewModel.setFavoriteTvShow()
-                    infoToast(
+                    showInfoToast(
                         getString(R.string.info),
                         getString(R.string.message_remove_favorite)
                     )
