@@ -86,6 +86,11 @@ dependencies {
     implementation "org.koin:koin-android:$coin"
     implementation "org.koin:koin-androidx-viewmodel:$coin"
 
+    // Testing Barista
+    androidTestImplementation('com.adevinta.android:barista:4.2.0') {
+        exclude group: 'org.jetbrains.kotlin'
+    }
+
     //Glide
     implementation "com.github.bumptech.glide:glide:$glideVersion"
 

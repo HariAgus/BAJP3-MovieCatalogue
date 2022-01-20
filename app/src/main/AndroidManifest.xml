@@ -14,7 +14,9 @@
         android:theme="@style/Theme.FinalProject">
         <activity android:name="com.hariagus.finalproject.ui.favorite.FavoriteActivity" />
         <activity android:name="com.hariagus.finalproject.ui.detail.DetailActivity" />
-        <activity android:name="com.hariagus.finalproject.ui.SplashScreenActivity">
+        <activity
+            android:name="com.hariagus.finalproject.ui.SplashScreenActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

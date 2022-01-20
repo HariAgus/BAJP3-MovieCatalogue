@@ -49,16 +49,16 @@ class MovieFragment : Fragment() {
             adapter = moviesAdapter
         }
 
+        onClick()
+    }
+
+    private fun onClick() {
         binding.apply {
             fabNewest.setOnClickListener { setList(SortUtils.NEWEST) }
             fabOldest.setOnClickListener { setList(SortUtils.OLDEST) }
             fabPopularity.setOnClickListener { setList(SortUtils.POPULARITY) }
         }
 
-        onClick()
-    }
-
-    private fun onClick() {
         moviesAdapter.onClick { data ->
             requireContext().startActivity<DetailActivity>(
                 DetailActivity.EXTRA_TYPE to TypeDetail.MOVIE.ordinal,
