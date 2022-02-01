@@ -60,6 +60,7 @@ class HomeActivityTest {
     fun loadDetailTvShow() {
         clickOn("TV SHOW")
         clickListItem(R.id.rvTvShow, 0)
+        assertDisplayed(R.id.posterBg)
         assertDisplayed(R.id.roundedPosterDetail)
         assertDisplayed(R.id.tvTitleDetail)
         assertDisplayed(R.id.tvReleaseDate)
@@ -76,6 +77,7 @@ class HomeActivityTest {
         clickOn(R.id.ivFavoriteActivity)
         clickListItem(R.id.rvMovieFavorite, 0)
 
+        assertDisplayed(R.id.posterBg)
         assertDisplayed(R.id.roundedPosterDetail)
         assertDisplayed(R.id.tvTitleDetail)
         assertDisplayed(R.id.tvReleaseDate)
@@ -97,6 +99,7 @@ class HomeActivityTest {
         clickOn("Favorite TV")
         clickListItem(R.id.rvTvShowFavorite, 0)
 
+        assertDisplayed(R.id.posterBg)
         assertDisplayed(R.id.roundedPosterDetail)
         assertDisplayed(R.id.tvTitleDetail)
         assertDisplayed(R.id.tvReleaseDate)
