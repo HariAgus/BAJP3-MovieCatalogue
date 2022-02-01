@@ -37,21 +37,21 @@ class DetailActivity : AppCompatActivity() {
         when (typeEnum) {
             TypeDetail.MOVIE -> {
                 viewModel.setSelectedMovie(id)
-                viewModel.movieDetail.observe(this, { movie ->
+                viewModel.movieDetail.observe(this) { movie ->
                     if (movie != null) {
                         this.movie = movie
                         showDetailData(movie)
                     }
-                })
+                }
             }
             TypeDetail.TV_SHOW -> {
                 viewModel.setSelectedTvShow(id)
-                viewModel.tvShowDetail.observe(this, { tvShow ->
+                viewModel.tvShowDetail.observe(this) { tvShow ->
                     if (tvShow != null) {
                         this.tvShow = tvShow
                         showDetailData(tvShow)
                     }
-                })
+                }
             }
         }
 

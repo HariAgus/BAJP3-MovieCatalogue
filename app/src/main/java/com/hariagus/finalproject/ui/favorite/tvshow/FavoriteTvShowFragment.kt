@@ -37,10 +37,10 @@ class FavoriteTvShowFragment : Fragment() {
         favoriteAdapter = FavoriteTvShowAdapter()
 
         binding?.progressSpinKitList?.visibility = View.VISIBLE
-        viewModel.getFavoriteTvShows().observe(requireActivity(), { movies ->
+        viewModel.getFavoriteTvShows().observe(requireActivity()) { movies ->
             binding?.progressSpinKitList?.visibility = View.GONE
             favoriteAdapter.submitList(movies)
-        })
+        }
 
         with(binding?.rvTvShowFavorite) {
             this?.setHasFixedSize(true)

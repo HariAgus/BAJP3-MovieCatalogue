@@ -33,18 +33,20 @@
                         android:layout_width="match_parent"
                         android:layout_height="275dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/sample_poster" />
+                        android:src="@drawable/sample_poster"
+                        android:contentDescription="@string/content_desc_poster" />
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/fg_card_detail" />
+                        android:src="@drawable/fg_card_detail"
+                        android:contentDescription="@string/content_desc_poster" />
 
                     <TextView
                         android:id="@+id/tvScoreDetail"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:layout_gravity="right"
+                        android:layout_gravity="end"
                         android:layout_marginTop="@dimen/activity_vertical_margin"
                         android:layout_marginEnd="@dimen/activity_horizontal_margin"
                         android:layout_marginBottom="@dimen/activity_vertical_margin"
@@ -83,7 +85,8 @@
                 app:layout_constraintBottom_toBottomOf="@id/cardViewTop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cardViewTop"
-                app:rippleColor="@color/primary" />
+                app:rippleColor="@color/primary"
+                android:contentDescription="@string/content_desc_fab_fav" />
 
             <TextView
                 android:id="@+id/tvTitleDetail"
@@ -165,7 +168,7 @@
                         android:layout_marginStart="4dp"
                         android:layout_marginEnd="4dp"
                         android:fontFamily="@font/quicksand_bold"
-                        android:text=":"
+                        android:text="@string/symbol_hyphen"
                         android:textColor="@color/textColorWhite"
                         android:textSize="@dimen/text_size_xnormal" />
 

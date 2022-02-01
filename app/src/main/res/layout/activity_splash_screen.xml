@@ -12,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="175dp"
         android:layout_marginTop="225dp"
-        android:src="@drawable/icon_movie" />
+        android:src="@drawable/icon_movie"
+        android:contentDescription="@string/content_desc_sscreen" />
 
     <com.github.ybq.android.spinkit.SpinKitView
         android:id="@+id/spinKitSplash"
