@@ -27,4 +27,13 @@
     <string name="message_add_favorite">You have successfully add favorite</string>
     <string name="info" translatable="false">Info</string>
     <string name="message_remove_favorite">You have successfully remove favorite</string>
+    <string name="symbol_hyphen" translatable="false">:</string>
+
+    <!-- Content Description -->
+    <string name="content_desc_poster" translatable="false">Image Poster</string>
+    <string name="content_desc_fab_fav" translatable="false">FAB Favorite</string>
+    <string name="content_desc_change_language" translatable="false">Image Change Language</string>
+    <string name="content_desc_favorite" translatable="false">Image Favorite</string>
+    <string name="content_desc_sscreen" translatable="false">Image SplashScreen</string>
+
 </resources>

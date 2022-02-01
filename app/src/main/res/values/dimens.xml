@@ -9,7 +9,6 @@
     <dimen name="theme_corner_radius">5dp</dimen>
     <dimen name="list_horizontal_margin">0dp</dimen>
 
-
     <!-- Default screen margins, per the Android Design guidelines. -->
     <!-- Text Size -->
     <dimen name="text_size_tiny">6sp</dimen>

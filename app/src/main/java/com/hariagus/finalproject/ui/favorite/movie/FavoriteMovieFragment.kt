@@ -40,10 +40,10 @@ class FavoriteMovieFragment : Fragment() {
         favoriteAdapter = FavoriteMovieAdapter()
 
         binding.progressSpinKitList.visible()
-        viewModel.getFavoriteMovies().observe(requireActivity(), { movies ->
+        viewModel.getFavoriteMovies().observe(requireActivity()) { movies ->
             binding.progressSpinKitList.gone()
             favoriteAdapter.submitList(movies)
-        })
+        }
 
         with(binding.rvMovieFavorite) {
             this.setHasFixedSize(true)

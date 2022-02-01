@@ -15,7 +15,7 @@ import org.junit.Before
 import org.junit.Test
 
 
-class HomeActivityTest() {
+class HomeActivityTest {
 
     private val dummyMovies = DataDummyMovies.generateDummyMovies()
     private val dummyTvShows = DataDummyTvShow.generateDummyTvShow()

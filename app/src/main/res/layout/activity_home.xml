@@ -32,6 +32,7 @@
                 android:src="@drawable/ic_change_language"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:contentDescription="@string/content_desc_change_language"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
@@ -44,6 +45,7 @@
                 android:src="@drawable/ic_favorite"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/ivChangeLanguage"
+                android:contentDescription="@string/content_desc_favorite"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -61,7 +63,7 @@
         app:tabSelectedTextColor="@color/primary"
         app:tabTextColor="@color/white" />
 
-    <androidx.viewpager.widget.ViewPager
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/homeViewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
