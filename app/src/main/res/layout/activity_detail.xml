@@ -213,6 +213,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/quicksand"
                         android:text="@string/_198_239"
+                        android:contentDescription="@string/content_description_popularity"
                         android:textColor="@color/textColorWhite"
                         android:textSize="@dimen/text_size_xnormal" />
 
