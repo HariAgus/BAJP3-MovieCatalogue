@@ -23,7 +23,7 @@ data class TvShowItem(
 	val posterPath: String,
 
 	@field:SerializedName("backdrop_path")
-	val backdropPath: String,
+	val backdropPath: String? = null,
 
 	@field:SerializedName("first_air_date")
 	val firstAirDate: String,

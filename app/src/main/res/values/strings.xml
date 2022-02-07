@@ -35,5 +35,6 @@
     <string name="content_desc_change_language" translatable="false">Image Change Language</string>
     <string name="content_desc_favorite" translatable="false">Image Favorite</string>
     <string name="content_desc_sscreen" translatable="false">Image SplashScreen</string>
+    <string name="content_description_popularity">198</string>
 
 </resources>
