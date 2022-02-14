@@ -52,22 +52,21 @@ class MovieRepositoryTest {
         dummyMovie.value = DataDummyMovies.generateDummyMovies()[0]
         `when`(local.getMovie(movieId)).thenReturn(dummyMovie)
 
-        val movieEntity = LiveDataTestUtil.getValue(movieRepository.getMovieById(movieId)).data
+        val movieEntity = LiveDataTestUtil.getValue(movieRepository.getMovieById(movieId)).data!!
         verify(local).getMovie(movieId)
         val movieResponse = movieResponse[0]
+
         assertNotNull(movieEntity)
-        if (movieEntity != null) {
-            assertEquals(movieResponse.overview, movieEntity.overview)
-            assertEquals(movieResponse.originalLanguage, movieEntity.originalLanguage)
-            assertEquals(movieResponse.title, movieEntity.title)
-            assertEquals(movieResponse.posterPath, movieEntity.posterPath)
-            assertEquals(movieResponse.backdropPath, movieEntity.backdropPath)
-            assertEquals(movieResponse.releaseDate, movieEntity.releaseDate)
-            assertEquals(movieResponse.popularity, movieEntity.popularity)
-            assertEquals(movieResponse.voteAverage, movieEntity.voteAverage)
-            assertEquals(movieResponse.id, movieEntity.id)
-            assertEquals(movieResponse.voteCount, movieEntity.voteCount)
-        }
+        assertEquals(movieResponse.overview, movieEntity.overview)
+        assertEquals(movieResponse.originalLanguage, movieEntity.originalLanguage)
+        assertEquals(movieResponse.title, movieEntity.title)
+        assertEquals(movieResponse.posterPath, movieEntity.posterPath)
+        assertEquals(movieResponse.backdropPath, movieEntity.backdropPath)
+        assertEquals(movieResponse.releaseDate, movieEntity.releaseDate)
+        assertEquals(movieResponse.popularity, movieEntity.popularity)
+        assertEquals(movieResponse.voteAverage, movieEntity.voteAverage)
+        assertEquals(movieResponse.id, movieEntity.id)
+        assertEquals(movieResponse.voteCount, movieEntity.voteCount)
     }
 
     @Test
@@ -88,22 +87,21 @@ class MovieRepositoryTest {
         dummyTvShow.value = DataDummyTvShow.generateDummyTvShow()[0]
         `when`(local.getTvShow(tvShowId)).thenReturn(dummyTvShow)
 
-        val movieEntity = LiveDataTestUtil.getValue(movieRepository.getTvShowById(tvShowId)).data
+        val movieEntity = LiveDataTestUtil.getValue(movieRepository.getTvShowById(tvShowId)).data!!
         verify(local).getTvShow(tvShowId)
         val tvShowResponse = tvShowResponse[0]
+
         assertNotNull(movieEntity)
-        if (movieEntity != null) {
-            assertEquals(tvShowResponse.overview, movieEntity.overview)
-            assertEquals(tvShowResponse.originalLanguage, movieEntity.originalLanguage)
-            assertEquals(tvShowResponse.name, movieEntity.title)
-            assertEquals(tvShowResponse.popularity, movieEntity.popularity)
-            assertEquals(tvShowResponse.voteAverage, movieEntity.voteAverage)
-            assertEquals(tvShowResponse.id, movieEntity.id)
-            assertEquals(tvShowResponse.backdropPath, movieEntity.backdropPath)
-            assertEquals(tvShowResponse.firstAirDate, movieEntity.releaseDate)
-            assertEquals(tvShowResponse.voteCount, movieEntity.voteCount)
-            assertEquals(tvShowResponse.posterPath, movieEntity.posterPath)
-        }
+        assertEquals(tvShowResponse.overview, movieEntity.overview)
+        assertEquals(tvShowResponse.originalLanguage, movieEntity.originalLanguage)
+        assertEquals(tvShowResponse.name, movieEntity.title)
+        assertEquals(tvShowResponse.popularity, movieEntity.popularity)
+        assertEquals(tvShowResponse.voteAverage, movieEntity.voteAverage)
+        assertEquals(tvShowResponse.id, movieEntity.id)
+        assertEquals(tvShowResponse.backdropPath, movieEntity.backdropPath)
+        assertEquals(tvShowResponse.firstAirDate, movieEntity.releaseDate)
+        assertEquals(tvShowResponse.voteCount, movieEntity.voteCount)
+        assertEquals(tvShowResponse.posterPath, movieEntity.posterPath)
     }
 
     @Test

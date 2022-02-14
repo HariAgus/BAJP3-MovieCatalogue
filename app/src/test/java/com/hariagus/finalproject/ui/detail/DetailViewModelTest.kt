@@ -9,6 +9,8 @@ import com.hariagus.finalproject.utils.DataDummyMovies
 import com.hariagus.finalproject.utils.DataDummyTvShow
 import com.hariagus.finalproject.vo.Resource
 import com.nhaarman.mockitokotlin2.verify
+import junit.framework.Assert.assertEquals
+import junit.framework.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -49,6 +51,19 @@ class DetailViewModelTest {
         val movie = MutableLiveData<Resource<MovieEntity>>()
         movie.value = movieDetail
         `when`(movieRepository.getMovieById(movieId)).thenReturn(movie)
+
+        assertNotNull(movie)
+        movieDetail.data?.let { movieEntity ->
+            assertEquals(dataDummyMovie.id, movieEntity.id)
+            assertEquals(dataDummyMovie.backdropPath, movieEntity.backdropPath)
+            assertEquals(dataDummyMovie.posterPath, movieEntity.posterPath)
+            assertEquals(dataDummyMovie.title, movieEntity.title)
+            assertEquals(dataDummyMovie.releaseDate, movieEntity.releaseDate)
+            assertEquals(dataDummyMovie.originalLanguage, movieEntity.originalLanguage)
+            assertEquals(dataDummyMovie.popularity, movieEntity.popularity)
+            assertEquals(dataDummyMovie.overview, movieEntity.overview)
+        }
+
         detailViewModel.movieDetail.observeForever(movieObserver)
         verify(movieObserver).onChanged(movieDetail)
     }
@@ -59,6 +74,19 @@ class DetailViewModelTest {
         val movie = MutableLiveData<Resource<MovieEntity>>()
         movie.value = tvShowDetail
         `when`(movieRepository.getTvShowById(tvShowId)).thenReturn(movie)
+
+        assertNotNull(movie)
+        tvShowDetail.data?.let { tvShowEntity ->
+            assertEquals(dataDummyMovie.id, tvShowEntity.id)
+            assertEquals(dataDummyMovie.backdropPath, tvShowEntity.backdropPath)
+            assertEquals(dataDummyMovie.posterPath, tvShowEntity.posterPath)
+            assertEquals(dataDummyMovie.title, tvShowEntity.title)
+            assertEquals(dataDummyMovie.releaseDate, tvShowEntity.releaseDate)
+            assertEquals(dataDummyMovie.originalLanguage, tvShowEntity.originalLanguage)
+            assertEquals(dataDummyMovie.popularity, tvShowEntity.popularity)
+            assertEquals(dataDummyMovie.overview, tvShowEntity.overview)
+        }
+
         detailViewModel.tvShowDetail.observeForever(movieObserver)
         verify(movieObserver).onChanged(tvShowDetail)
     }
