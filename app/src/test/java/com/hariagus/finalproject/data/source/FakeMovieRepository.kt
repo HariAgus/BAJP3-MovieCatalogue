@@ -15,10 +15,12 @@ import com.hariagus.finalproject.vo.Resource
 class FakeMovieRepository(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
-    private val appExecutors: AppExecutors) : MovieDataSource {
+    private val appExecutors: AppExecutors
+) : MovieDataSource {
 
     override fun getAllMovies(sort: String): LiveData<Resource<PagedList<MovieEntity>>> {
-        return object : NetworkBoundResource<PagedList<MovieEntity>, List<MovieItem>>(appExecutors) {
+        return object :
+            NetworkBoundResource<PagedList<MovieEntity>, List<MovieItem>>(appExecutors) {
             override fun loadFromDB(): LiveData<PagedList<MovieEntity>> {
                 val config = PagedList.Config.Builder()
                     .setEnablePlaceholders(false)

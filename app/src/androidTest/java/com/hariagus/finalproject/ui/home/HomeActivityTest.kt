@@ -2,7 +2,6 @@ package com.hariagus.finalproject.ui.home
 
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.IdlingRegistry
-import androidx.test.espresso.matcher.ViewMatchers
 import com.adevinta.android.barista.assertion.BaristaVisibilityAssertions.assertDisplayed
 import com.adevinta.android.barista.interaction.BaristaClickInteractions.clickBack
 import com.adevinta.android.barista.interaction.BaristaClickInteractions.clickOn
@@ -14,7 +13,6 @@ import com.hariagus.finalproject.utils.EspressoIdlingResource
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-
 
 class HomeActivityTest {
 
@@ -41,13 +39,14 @@ class HomeActivityTest {
     @Test
     fun loadDetailMovies() {
         clickListItem(R.id.rvMovie, 0)
-        assertDisplayed(R.id.posterBg, dummyMovies[0].backdropPath)
-        assertDisplayed(R.id.roundedPosterDetail, dummyMovies[0].posterPath)
-        assertDisplayed(R.id.tvTitleDetail, dummyMovies[0].title)
-        assertDisplayed(R.id.tvReleaseDate, dummyMovies[0].releaseDate)
-        assertDisplayed(R.id.tvOverview, dummyMovies[0].overview)
-        assertDisplayed(R.id.tvLanguage, dummyMovies[0].originalLanguage)
-        assertDisplayed(R.id.tvPopularity, R.string.content_description_popularity)
+        assertDisplayed(R.id.posterBg)
+        assertDisplayed(R.id.roundedPosterDetail)
+        assertDisplayed(R.id.tvScoreDetail)
+        assertDisplayed(R.id.tvTitleDetail)
+        assertDisplayed(R.id.tvReleaseDate)
+        assertDisplayed(R.id.tvOverview)
+        assertDisplayed(R.id.tvLanguage)
+        assertDisplayed(R.id.tvPopularity)
     }
 
     @Test
@@ -63,6 +62,7 @@ class HomeActivityTest {
         clickListItem(R.id.rvTvShow, 0)
         assertDisplayed(R.id.posterBg)
         assertDisplayed(R.id.roundedPosterDetail)
+        assertDisplayed(R.id.tvScoreDetail)
         assertDisplayed(R.id.tvTitleDetail)
         assertDisplayed(R.id.tvReleaseDate)
         assertDisplayed(R.id.tvOverview)
@@ -80,6 +80,7 @@ class HomeActivityTest {
 
         assertDisplayed(R.id.posterBg)
         assertDisplayed(R.id.roundedPosterDetail)
+        assertDisplayed(R.id.tvScoreDetail)
         assertDisplayed(R.id.tvTitleDetail)
         assertDisplayed(R.id.tvReleaseDate)
         assertDisplayed(R.id.tvOverview)
@@ -102,6 +103,7 @@ class HomeActivityTest {
 
         assertDisplayed(R.id.posterBg)
         assertDisplayed(R.id.roundedPosterDetail)
+        assertDisplayed(R.id.tvScoreDetail)
         assertDisplayed(R.id.tvTitleDetail)
         assertDisplayed(R.id.tvReleaseDate)
         assertDisplayed(R.id.tvOverview)
